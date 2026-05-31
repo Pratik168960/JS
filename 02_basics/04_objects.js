@@ -77,3 +77,53 @@ console.log(Object.keys(tinderUser))  // datatype array
 console.log(Object.values(tinderUser))  
 console.log(Object.entries(tinderUser))  
 console.log(tinderUser.hasOwnProperty('isLoggedIn'))
+
+
+
+
+
+
+
+
+//destructuring 
+const course = {
+    coursename: "js in hindi",
+    price: "999",
+    courseInstructor: "hitesh"
+}
+
+// course.courseInstructor
+// course.price
+// course.coursename
+// instead of this
+
+const { courseInstructor : instructor} = course
+// console.log(courseInstructor)
+console.log(instructor)
+
+
+
+
+// API         -- apna kaam dusro k sir pr daalna
+
+
+// key & values usually both are string
+// {
+//     "name": "pratik",
+//     "coursename": "js in hindi",
+//     "price": "free"
+// }
+
+
+
+    
+// api can be returned in array form also 
+[
+    {},
+    {},
+    {}
+]
+
+
+// all here are json api 
+// json : javascript object notation
