@@ -67,3 +67,50 @@ function loginUserMessage(username) {
     return `${username} just logged in`
 }
 console.log(loginUserMessage());
+
+
+// there can be case like shopping cart in which we don't know the amount
+// of products that is we don't know how many arguments
+
+
+// function calculateCartPrice(num1) {
+//     return num1 
+// }
+// console.log(calculateCartPrice(2)) 
+// console.log(calculateCartPrice(200, 400, 500)) 
+
+function calculateCartPrice(...num1) {     // (...) rest operator as well as spread operator 
+    return num1 
+}
+console.log(calculateCartPrice(200, 400, 500,2000)) 
+// rest ka mtlb yeh h ki jo bhi values h unhe ek bundle mei pack kro aur dedo
+// it gives an array
+
+
+//function calculateCartPrice(val1, val2, ...num1) --> [500, 2000]
+// val1 = 200, val2 = 400, and the rest are in ...num1 this is use of rest operator
+
+const user = {
+    username: "pratik",
+    price: 199
+}
+
+function handleObject(anyObject) {
+    console.log(`Username is ${anyObject.username} and price is ${anyObject.price}`);
+    
+}
+
+// handleObject(user)
+handleObject({
+    username: "sam",
+    price: 399
+})
+
+
+const myNewArray = [200, 400, 600, 1100]
+function returnSecondValue(getArray) {
+    return getArray[1]
+}
+
+// console.log(returnSecondValue(myNewArray))
+console.log(returnSecondValue([200, 440, 500, 1000]))
