@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body style="background-color: #414141; color: aliceblue;">
+    <h2>Amazing image</h2>
+    <div >
+        <ul id="images">
+            <li><img width="200px" id="photoshop" src="https://images.pexels.com/photos/3561339/pexels-photo-3561339.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="photoshop"></li>
+            <li><img width="200px" id="japan" src="https://images.pexels.com/photos/3532553/pexels-photo-3532553.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="river" src="https://images.pexels.com/photos/3532551/pexels-photo-3532551.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><img width="200px" id="owl" src="https://images.pexels.com/photos/3532552/pexels-photo-3532552.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt="" ></li>
+            <li><img width="200px" id="prayer" src="https://images.pexels.com/photos/2522671/pexels-photo-2522671.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load" alt=""></li>
+            <li><a style="color: aliceblue;" href="https://google.com" id="google">Google</a></li>
+        </ul>
+   </div>
+</body>
+<script>
+
+    // all events in js run sequentially but also have some exceptions. 
+    // JS is sequentially run language but there are some cases where 
+    // we ignore the sequence like asynchronous programming where we deviate 
+    // the task and again get back to it same as it there some events in 
+    // browser too which are invoked at some activity not only sequentially
+
+    // document.getElementById('owl').onclick = function(){
+    //     alert("owl clicked")
+    // } // less features
+    // approach is good but has a problem there can be problems as onclick 
+    // we do not get much information we should use eventlisteners
+    // bcoz it not only gives the onclick functionality but also gives propogation ability
+
+
+
+
+    // document.getElementById('owl').addEventListener('click', function(e){
+    //     alert('owl clicked again')
+    // })
+    // third parameter is false by default  
+
+    // attachEvent() method -- early times
+    // jQuery -- on eventlistener 
+
+    document.getElementById('owl').addEventListener('click', function(e){
+        console.log(e)   // this gives pointerEvent which is an object which has many things in it 
+
+    }, false)
+    // type, timestamp, defaultPrevented
+    // target, toElement, srcElement, currentTarget, 
+    // clientX, clientY, offset, screenX, screenY 
+    // altkey, ctrlkey, shiftkey, keyCode
+    
+
+    // EVENT PROPOGATION
+    // two context 
+    // 1.event bubbling 
+    // 2.event capturing
+    // most used default false that is event bubbling 
+    // there are some scenarios where event capturing is used 
+
+    document.getElementById('images').addEventListener('click', function(e){
+        console.log("Clicked inside the ul")
+
+    }, false) // false can be removed as it is default 
+
+    document.getElementById('owl').addEventListener('click', function(e){
+        console.log("Owl clicked")
+        e.stopPropagation()     // so that it will not bubble up and go up
+        // same as preventDefault
+    }, false)
+
+    // so there could be a case when we click on owl it is already in the ul 
+    // that means upper event should also execute so what would be correct order for this 
+
+    // event propogation is all about bubbling up from bottom to up 
+    // BUBBLING UP --> bottom to up
+    // inner element -> li -> ul 
+
+
+
+
+    // CAPTURING MODE --> top to down
+    document.getElementById('images').addEventListener('click', function(e){
+        console.log("Clicked inside the ul")
+
+    }, true) 
+
+    document.getElementById('owl').addEventListener('click', function(e){
+        console.log("Owl clicked")
+
+    }, true)
+    // first ul then owl 
+
+
+    document.getElementById('google').addEventListener('click', function(e){
+        e.preventDefault()
+        e.stopPropagation()
+        console.log("google clicked")
+    },false) // google clicked no bubbling up 
+
+
+    // now our task is to be disappear the image when we click on it 
+    document.querySelector('#images').addEventListener('click', function(e){
+        console.log(e.target.parentNode) // in some scenarios we may need to do operation on the parent node 
+        // like in this case we have to remove the li not the image so we have to select the li i.e parent node 
+        
+        // console.log(e.target.tagName)
+        // let removeIt = e.target.parentNode
+        // removeIt.remove()  // 1st approach
+
+        // another approach
+        // removeIt.parentNode.removeChild(removeIt) // access the parentNode of removeIt(li->ul) and then method removeChild
+
+        // as we have used the remove method when we try to click on some li whole ul will get disappear as parent of li is ul
+        console.log(e.target.tagName)
+        if(e.target.tagName === 'IMG'){
+            console.log(e.target.id)
+            let removeIt = e.target.parentNode
+            removeIt.remove()
+        }
+    }, false /*event propagation*/)
+
+
+</script>
+</html>
