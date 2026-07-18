@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Pratik</h1>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    // setTimeout 
+    // a method which calls an api also 
+    // executes the function once after the time given in parameter 
+
+    // setInterval 
+    // executes the function again and again after interval breakpoint 
+
+    const sayPratik = function(){
+        console.log("Pratik")
+    }
+    // setTimeout(sayPratik /*only reference not execution*/, 2000)
+    
+    
+    // document.querySelector('h1').innerHTML = "Singh" // this will directly change the h1 from Pratik to Singh 
+    // but i want this change should be after 2sec so for that 
+    const changeText = function(){
+        document.querySelector('h1').innerHTML = "Singh"
+    }
+    
+    // setTimeout(changeText /*only reference not execution*/, 2000)
+    
+    // but now we should also know how to stop this 
+    // for that clearTimeout() is used and it requires the reference 
+    const changeMe = setTimeout(changeText, 2000)
+    // clearTimeout(changeMe) 
+    
+    document.querySelector('#stop').addEventListener('click', function(){
+        clearTimeout(changeMe)
+        console.log("STOPPED")
+    })
+</script>
+</html>
