@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- before fetch there was XML HTTP request 
+    AJAX programming -- Asynchronous Javascript and XML
+
+    XML HttpRequest.ready.State  -->
+    <!--| Value |        State         |                         Description                             |
+        |   0   |        UNSENT        | Client has been created. `open()` not called yet.               |
+        |   1   |        OPENED        | `open()` has been called.                                       |
+        |   2   |   HEADERS_RECEIVED   | `send()` has been called, and headers and status are available. |
+        |   3   |       LOADING        | Downloading; `responseText` holds partial data.                 |
+        |   4   |         DONE         | The operation is complete.                                      | -->
+
+    
+</body>
+<script>
+    const requestUrl = 'https://api.github.com/users/Pratik168960'
+    const xhr = new XMLHttpRequest()
+    // a method which contains the ready states 
+
+    // 1. Initialize the GET request
+    xhr.open('GET', requestUrl )
+    // open needs to be called using send 
+    // but using this only gives 1 once after that we have 
+    // not told it track continously 
+    // 2. Track state changes continuously
+    xhr.onreadystatechange = function(){
+        console.log(xhr.readyState) 
+        // to detect state 
+        // 3. Check if the request is completely DONE (State 4)
+        if(xhr.readyState === 4)  {
+            // const data = this.responseText
+            // console.log(typeof data) // string 
+            // response from url is in string most of the time
+            // now how we will convert this string 
+            // API responses usually come back as strings.
+            // We use JSON.parse() to convert the string into a usable object.
+            const data = JSON.parse(this.responseText)
+            console.log(typeof data) // object 
+            console.log(data.followers)
+        } 
+    }
+    // 4. Send the request to the server
+    xhr.send() 
+</script>
+</html>
