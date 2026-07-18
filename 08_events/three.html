@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Javascript</h1>
+    <button id="start">Start</button>
+    <button id="stop">Stop</button>
+</body>
+<script>
+    // setInterval(function(){
+    //     console.log("Pratik")
+    // }, 1000)
+    // this will print Pratik after every 1 sec 
+    
+    const sayDate = function(str){
+        console.log(str, "Pratik", Date.now());
+    }
+
+    // 1. Declare the variable with 'let' but don't start the interval yet.
+    let intervalId = null; 
+    
+    document.querySelector('#start').addEventListener('click', function(){
+        // Safety check: only start a new interval if one isn't already running.
+        // This prevents the bug where clicking "start" 5 times creates 5 overlapping timers!
+        if (!intervalId) {
+            // 2. Actually call setInterval here and assign it to our variable
+            intervalId = setInterval(sayDate, 1000, "hi");
+        }
+    })
+
+    const clearInt = function(){
+        clearInterval(intervalId);
+        // 3. Reset the ID to null so we know the timer is off, allowing us to start it again later.
+        intervalId = null; 
+    }
+
+    document.querySelector('#stop').addEventListener('click', function(){
+        clearInt();
+    })
+</script>
+</html>
