@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React</title>
+</head>
+<body>
+    <button>Button clicked</button>
+</body>
+<script>
+    // BINDING 'this' IN CLASSES
+
+    class React{
+        constructor(){
+            this.library = "React"
+            this.server = "https://localhost:3000"
+
+
+            // REQUIREMENT:
+            // When the object is created, grab the button and attach a click event
+            // as the page load an object to be created of react and we should get 
+            // a reference to button and a method handle click which will give 
+            // some msg 
+
+
+        //     document
+        //         .querySelector('button')
+        //         .addEventListener('click', this.handleClick)
+
+        // }
+        // handleClick(){
+        //     console.log("Button clicked")
+        //     console.log(this.server) // undefined , reference of this lost 
+            // does it have reference of this or not 
+            // YES, it has reference to this and is not empty as of call 
+            // now what we can do in constructor as it gives reference
+
+
+            // in this case 'bind' keyword is used 
+            // now we don't only want to give bind reference but we have to bind  
+            // to attach with it 
+
+                // THE PROBLEM:
+                // button.addEventListener('click', this.handleClick)
+                // If we do the line above, 'this' inside handleClick is lost. 
+                // JavaScript makes 'this' refer to the button element that was clicked, 
+                // not our React class. So this.server would be undefined.
+
+                // THE SOLUTION:
+                // We use the 'bind' method. 
+                // .bind(this) hardcodes the context so that whenever handleClick runs, 
+                // 'this' permanently refers to our class instance.
+
+            document
+                .querySelector('button')
+                .addEventListener('click', this.handleClick.bind(this))
+
+        }
+
+
+        handleClick(){
+            console.log("Button clicked")
+            // Because we used .bind(this), we have access to class variables
+            console.log(this.server)
+            // now we have access to all variables and functions 
+        }
+    }
+// Creating the object triggers the constructor
+    const app = new React()
+</script>
+</html>
