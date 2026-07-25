@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Closure</title>
+</head>
+<body>
+    
+</body>
+<script>
+    // function init(){
+    //     let name = "Mozilla"
+    //     function displayName(){
+    //         console.log(name)
+    //     }
+    //     displayName()
+    // }
+    // init()
+
+
+    
+
+    function outer(){
+        let username = "pratik"
+        function inner(){
+            console.log("INNER" ,username) 
+            // variables of outer function is accessible here 
+            // LEXICAL SCOPING :
+            // Lexical scoping means that a variable's accessibility is determined 
+            // by where it is physically written in the source code, allowing nested 
+            // functions to access variables declared in their surrounding parent scopes
+        }
+        inner()
+    }
+    outer()
+    console.log("TOO OUTER", username) // will i have access to username here or not 
+    // variables in function scope not accessible outside 
+
+
+
+    // CLOSURE
+    // A closure is a function that remembers and can access variables from its 
+    // surrounding scope, even after the parent function that created it has 
+    // finished executing.
+
+
+    function makeFunc(){
+        const name = "Mozilla"
+        function displayName() {
+            console.log(name)
+        }
+        return displayName // in previous example we were executing function and printing 
+        // now here it is giving reference 
+        // here comes role of memory of reference 
+        // if there is an outer function it also goes in reference because lexical 
+        // scoping is present 
+    }
+
+
+    const myFunc = makeFunc()
+    myFunc()
+</script>
+</html>
