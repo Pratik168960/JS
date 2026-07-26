@@ -6,7 +6,8 @@
     <title>Closure</title>
 </head>
 <body>
-    
+    <button id="orange">Orange</button>
+    <button id="green">Green</button>
 </body>
 <script>
     // function init(){
@@ -50,15 +51,60 @@
         function displayName() {
             console.log(name)
         }
+        // Instead of executing the function here, we RETURN its reference.
+        // When a function is returned, it takes its entire lexical scope (memory) with it!
+
         return displayName // in previous example we were executing function and printing 
         // now here it is giving reference 
         // here comes role of memory of reference 
         // if there is an outer function it also goes in reference because lexical 
         // scoping is present 
     }
+    // closure 
+    // when a whole function is returned that time not only function is returned
+    // but also return lexical scope 
 
 
-    const myFunc = makeFunc()
-    myFunc()
+
+    
+
+    const myFunc = makeFunc() // makeFunc finishes executing
+    myFunc() // But myFunc still remembers the 'name' variable!
+</script>
+
+<script>
+    // CLOSURE (Real World Practical Use)
+
+    // now our goal is when we click on the button that color will be bg color 
+    // document.getElementById("orange").onclick = function(){
+    //     document.body.style.backgroundColor = "orange"
+    // }
+    // document.getElementById("green").onclick = function(){
+    //     document.body.style.backgroundColor = "green"
+    // }
+
+    // now i will provide 500 buttons and colors in array do the same 
+    // so we are not going to reject the DRY(Don't Repeat Yourself) principle 
+    // we will use click handler 
+
+
+    // method
+    function clickHandler(color){
+        // document.body.style.backgroundColor = `${color}` -- > this won't work 
+        // We return an inner function. 
+        // Because of closure, this inner function remembers the 'color' variable!
+        return function(){ // here this function has access to the color because of the lexical scoping and closure 
+            document.body.style.backgroundColor = `${color}`
+        }
+    }
+    // Now, we are assigning the RETURNED function reference to the onclick event.
+    // It waits patiently until the button is actually clicked.
+    document.getElementById('orange').oncLick = clickHandler("orange")   // clickhandler passing the value to onClick 
+    // without clicking it gets orange directly executed 
+
+    // problem we were expecting that we will get function in return but we did 
+    // function execution
+    // so we need to change the definition 
+
 </script>
 </html>
