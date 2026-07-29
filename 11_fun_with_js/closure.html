@@ -35,7 +35,7 @@
         inner()
     }
     outer()
-    console.log("TOO OUTER", username) // will i have access to username here or not 
+    // console.log("TOO OUTER", username) // will i have access to username here or not 
     // variables in function scope not accessible outside 
 
 
@@ -99,9 +99,10 @@
     }
     // Now, we are assigning the RETURNED function reference to the onclick event.
     // It waits patiently until the button is actually clicked.
-    document.getElementById('orange').oncLick = clickHandler("orange")   // clickhandler passing the value to onClick 
+    document.getElementById('orange').onclick = clickHandler("orange")   // clickhandler passing the value to onClick 
     // without clicking it gets orange directly executed 
 
+    document.getElementById('green').onclick = clickHandler("green");
     // problem we were expecting that we will get function in return but we did 
     // function execution
     // so we need to change the definition 
